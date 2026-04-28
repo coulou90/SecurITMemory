@@ -1,4 +1,15 @@
-﻿using System;
+﻿// ============================================================
+// FICHIER : JeuMemory.cs
+// AUTEURS : Souleymane Coulibaly & Benor Henry DA
+// PROJET  : SecurIT Memory - Salon de l'Innovation Tech
+// DATE    : Avril 2026
+// DESCRIPTION : Gestionnaire principal du jeu Memory.
+//               Couche métier pure - aucune dépendance WinForms.
+//               Utilise System.Timers.Timer (pas WinForms.Timer)
+//               pour respecter la séparation des couches.
+//               Communique avec l'UI via des événements C#.
+// ============================================================
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -6,6 +17,21 @@ using System.Timers;
 
 namespace SecurITMemory.Models
 {
+    /// <summary>
+    /// Gestionnaire principal du jeu Memory - COUCHE MÉTIER PURE.
+    /// 
+    /// Responsabilités :
+    /// - Initialiser et mélanger les cartes (algorithme Fisher-Yates)
+    /// - Gérer les clics et la logique de vérification des paires
+    /// - Déclencher le timer de délai (1.5s) pour les non-paires
+    /// - Bloquer les clics pendant le délai (anti-corruption)
+    /// - Gérer le chronomètre de jeu
+    /// - Notifier l'UI via des événements (TempsChange, Victoire, etc.)
+    /// 
+    /// Ce que cette classe ne fait PAS :
+    /// - Toucher aux contrôles WinForms (PictureBox, Label, etc.)
+    /// - Connaître l'existence de FormulaireJeu
+    /// </summary>
     public class JeuMemory
     {
         private List<Carte> _cartes;

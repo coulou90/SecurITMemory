@@ -1,11 +1,31 @@
-﻿using System;
+﻿// ============================================================
+// FICHIER : MenuPrincipal.cs
+// AUTEURS : Souleymane Coulibaly & Benor Henry DA
+// PROJET  : SecurIT Memory - Salon de l'Innovation Tech
+// DATE    : Avril 2026
+// DESCRIPTION : Menu principal de l'application - Point d'entrée UI.
+//               Permet de lancer une partie, configurer les options
+//               ou quitter l'application.
+//               Gère le cycle de vie : Menu -> Jeu -> Menu.
+// ============================================================
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace SecurITMemory.Forms
 {
     /// <summary>
-    /// Menu principal - Point d'entrée de l'application
+    /// Menu principal de l'application SecurIT Memory.
+    /// 
+    /// Responsabilités :
+    /// - Afficher les 3 boutons : Jouer, Options, Quitter
+    /// - Stocker les paramètres de partie (taille grille, thème)
+    /// - Ouvrir FormulaireJeu avec les paramètres choisis
+    /// - Ouvrir FormulaireOptions et récupérer les choix
+    /// - Se cacher pendant la partie et réapparaître après
+    /// 
+    /// Cycle de vie :
+    /// MenuPrincipal -> (Hide) -> FormulaireJeu -> (FormClosed) -> (Show)
     /// </summary>
     public partial class MenuPrincipal : Form
     {

@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ============================================================
+// FICHIER : FormulaireJeu.cs
+// AUTEURS : Souleymane Coulibaly & Benor Henry DA
+// PROJET  : SecurIT Memory - Salon de l'Innovation Tech
+// DATE    : Avril 2026
+// DESCRIPTION : Formulaire principal du jeu - COUCHE UI.
+//               Génère la grille dynamique de PictureBox.
+//               Possède le mapping Carte<->PictureBox via Dictionary.
+//               S'abonne aux événements de JeuMemory pour
+//               mettre à jour l'affichage (pattern Observer).
+//               Utilise Invoke() pour la sécurité cross-thread
+//               car System.Timers.Timer s'exécute sur thread secondaire.
+// ============================================================
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -6,6 +19,25 @@ using SecurITMemory.Models;
 
 namespace SecurITMemory.Forms
 {
+    /// <summary>
+    /// Formulaire principal du jeu Memory - COUCHE INTERFACE.
+    /// 
+    /// Responsabilités :
+    /// - Construire la grille dynamique de PictureBox
+    /// - Maintenir le mapping Dictionary Carte/PictureBox
+    /// - Mettre à jour l'affichage selon l'état des cartes
+    /// - Gérer les clics utilisateur et les transmettre à JeuMemory
+    /// - Afficher le chronomètre et le compteur d'essais
+    /// - Afficher l'écran de victoire
+    /// 
+    /// Pattern utilisé : Observer
+    /// FormulaireJeu s'abonne aux événements de JeuMemory
+    /// et réagit aux changements d'état sans polling.
+    /// 
+    /// Sécurité cross-thread :
+    /// Tous les handlers d'événements utilisent this.Invoke()
+    /// car System.Timers.Timer s'exécute sur un thread secondaire.
+    /// </summary>
     public partial class FormulaireJeu : Form
     {
         private JeuMemory _jeu;

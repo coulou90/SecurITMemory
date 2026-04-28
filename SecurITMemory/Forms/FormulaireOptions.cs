@@ -1,11 +1,39 @@
-﻿using System;
+﻿// ============================================================
+// FICHIER : FormulaireOptions.cs
+// AUTEURS : Souleymane Coulibaly & Benor Henry DA
+// PROJET  : SecurIT Memory - Salon de l'Innovation Tech
+// DATE    : Avril 2026
+// DESCRIPTION : Formulaire des options de partie.
+//               Permet de choisir la taille de grille et le thème.
+//               Retourne les choix via propriétés publiques
+//               après confirmation avec DialogResult.OK.
+// ============================================================
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace SecurITMemory.Forms
 {
     /// <summary>
-    /// Formulaire des options (taille grille, thème)
+    /// Formulaire des options - COUCHE INTERFACE.
+    /// 
+    /// Responsabilités :
+    /// - Afficher les choix de taille de grille (4x4 / 6x6)
+    /// - Afficher les choix de thème (Cybersécurité, Matériel, Logiciel)
+    /// - Pré-sélectionner les valeurs actuelles au chargement
+    /// - Retourner les nouveaux choix via TailleGrille et Theme
+    /// 
+    /// Utilisation depuis MenuPrincipal :
+    /// FormulaireOptions options = new FormulaireOptions(tailleActuelle, themeActuel);
+    /// if (options.ShowDialog() == DialogResult.OK)
+    /// {
+    ///     _tailleGrille = options.TailleGrille;
+    ///     _theme = options.Theme;
+    /// }
+    /// 
+    /// Sécurité :
+    /// - Fallback sur index 0 si thème inconnu
+    /// - Opérateur ?. pour éviter NullReferenceException
     /// </summary>
     public partial class FormulaireOptions : Form
     {
